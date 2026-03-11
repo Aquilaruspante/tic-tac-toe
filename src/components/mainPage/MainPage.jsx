@@ -1,8 +1,5 @@
 import { useState } from "react";
 import PlayArea from "../playArea/PlayArea";
-import Matrix from "../../backend/matrix";
-
-const matrix = new Matrix();
 
 function randomizeActivePlayer() {
     const index = Math.floor(Math.random() * 2);
@@ -21,7 +18,7 @@ export default function MainPage() {
     return (
         <>
             <h1>Tic Tac Toe</h1>
-            <PlayArea gameMatrix={matrix} activePlayer={activePlayer} setActivePlayer={setActivePlayer} />
+            <PlayArea activePlayer={activePlayer} setActivePlayer={setActivePlayer} />
             <button onClick={manageNewGameClick}>New Game</button>
         </>
     )

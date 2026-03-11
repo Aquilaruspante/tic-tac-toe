@@ -1,12 +1,18 @@
-import { useState } from 'react';
 import styles from './Cell.module.css';
 
-export default function Cell({x, y, activePlayer, gameMatrix, setActivePlayer}) {
-    const [matrix, setMatrix] = useState(gameMatrix.matrix);
+export default function Cell({x, y, activePlayer, gameMatrix, setActivePlayer, setMatrix}) {
 
+    function editMatrix(x, y, activePlayer) {
+        const newMatrix = [...gameMatrix];
+        if (activePlayer === 'O' && gameMatrix[y][x] === null) newMatrix[y][x] = 'O';
+        if (activePlayer === 'X' && gameMatrix[y][x] === null) newMatrix[y][x] = 'X';
+
+        return newMatrix;
+    };
+    
     function manageClick() {
         console.log(x, y, activePlayer);
-        setMatrix(matrix => gameMatrix.editMatrix(x, y, activePlayer));
+        setMatrix(gameMatrix => editMatrix(x, y, activePlayer));
         if (activePlayer === 'O') {
             setActivePlayer('X');
         } else {
@@ -15,6 +21,6 @@ export default function Cell({x, y, activePlayer, gameMatrix, setActivePlayer}) 
     };
 
     return (
-        <div className={styles.cell} onClick={manageClick}>{matrix[y][x] === 'X' ? 'X' : matrix[y][x] === 'O' ? 'O' : ''}</div>
+        <div className={styles.cell} onClick={manageClick}>{gameMatrix[y][x] === 'X' ? 'X' : gameMatrix[y][x] === 'O' ? 'O' : ''}</div>
     );
 };
