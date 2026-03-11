@@ -1,6 +1,6 @@
 import styles from './Cell.module.css';
 
-export default function Cell({x, y, activePlayer, gameMatrix, setActivePlayer, setMatrix}) {
+export default function Cell({x, y, activePlayer, gameMatrix, setActivePlayer, setMatrix, gameInitialized}) {
 
     function editMatrix(x, y, activePlayer) {
         const newMatrix = [...gameMatrix];
@@ -11,13 +11,14 @@ export default function Cell({x, y, activePlayer, gameMatrix, setActivePlayer, s
     };
     
     function manageClick() {
-        console.log(x, y, activePlayer);
-        setMatrix(gameMatrix => editMatrix(x, y, activePlayer));
-        if (activePlayer === 'O') {
-            setActivePlayer('X');
-        } else {
-            setActivePlayer('O');
-        };
+        if (gameInitialized) {
+            setMatrix(gameMatrix => editMatrix(x, y, activePlayer));
+            if (activePlayer === 'O') {
+                setActivePlayer('X');
+            } else {
+                setActivePlayer('O');
+            };
+        };      
     };
 
     return (

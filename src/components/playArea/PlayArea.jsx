@@ -8,7 +8,7 @@ const matrix = [
             [null, null, null],
         ];
 
-export default function PlayArea({ activePlayer, setActivePlayer }) {
+export default function PlayArea({ activePlayer, setActivePlayer, gameInitialized }) {
     const [gameMatrix, setMatrix] = useState(matrix);
    
     return (
@@ -16,7 +16,7 @@ export default function PlayArea({ activePlayer, setActivePlayer }) {
             {gameMatrix.map((row, indexY) => {
                 return <ul key={indexY} className={styles.row}>
                     {row.map((cell, indexX) => {
-                        return <Cell key={indexX} x={indexX} y={indexY} activePlayer={activePlayer} gameMatrix={gameMatrix} setActivePlayer={setActivePlayer} setMatrix={setMatrix} />
+                        return <Cell key={indexX} gameInitialized={gameInitialized} x={indexX} y={indexY} activePlayer={activePlayer} gameMatrix={gameMatrix} setActivePlayer={setActivePlayer} setMatrix={setMatrix} />
                     })}
                 </ul>
             })}
