@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PlayArea from "../playArea/PlayArea";
+import styles from './MainPage.module.css';
 
 function randomizeActivePlayer() {
     const index = Math.floor(Math.random() * 2);
@@ -21,9 +22,12 @@ export default function MainPage() {
 
     return (
         <>
-            <h1>Tic Tac Toe</h1>
+            <header className={styles.header}>
+                <h1 className={styles.title}>Tic Tac Toe</h1>
+            </header>
+            <div className={styles.infoPanel}>{activePlayer ? `Active Player: ${activePlayer}` : 'Start new game'}</div>
             <PlayArea activePlayer={activePlayer} setActivePlayer={setActivePlayer} gameInitialized={gameInitialized} />
-            <button onClick={manageNewGameClick}>New Game</button>
+            <button className={styles.button} onClick={manageNewGameClick}>New Game</button>
         </>
     )
 }
