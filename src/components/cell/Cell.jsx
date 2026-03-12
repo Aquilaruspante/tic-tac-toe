@@ -38,7 +38,6 @@ export default function Cell({x, y }) {
     };
     
     function manageClick() {
-        console.log('click', x, y, activePlayer);
         if (gameInitialized && !winner && gameMatrix[y][x] === null) {
             setMatrix(gameMatrix => editMatrix(x, y, activePlayer));
             if (activePlayer === 'O') {
