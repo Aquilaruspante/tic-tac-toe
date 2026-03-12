@@ -1,14 +1,14 @@
 import Cell from "../cell/Cell";
 import styles from './PlayArea.module.css';
 
-export default function PlayArea({ activePlayer, setActivePlayer, gameInitialized, gameMatrix, setMatrix, setWinner }) {
+export default function PlayArea({ activePlayer, setActivePlayer, gameInitialized, gameMatrix, setMatrix, setWinner, winner }) {
    
     return (
         <ul className={styles.box}>
             {gameMatrix.map((row, indexY) => {
                 return <ul key={indexY} className={styles.row}>
                     {row.map((cell, indexX) => {
-                        return <Cell key={indexX} setWinner={setWinner} gameInitialized={gameInitialized} x={indexX} y={indexY} activePlayer={activePlayer} gameMatrix={gameMatrix} setActivePlayer={setActivePlayer} setMatrix={setMatrix} />
+                        return <Cell key={indexX} winner={winner} setWinner={setWinner} gameInitialized={gameInitialized} x={indexX} y={indexY} activePlayer={activePlayer} gameMatrix={gameMatrix} setActivePlayer={setActivePlayer} setMatrix={setMatrix} />
                     })}
                 </ul>
             })}

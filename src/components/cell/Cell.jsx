@@ -1,6 +1,6 @@
 import styles from './Cell.module.css';
 
-export default function Cell({x, y, activePlayer, gameMatrix, setActivePlayer, setMatrix, gameInitialized, setWinner}) {
+export default function Cell({x, y, activePlayer, gameMatrix, setActivePlayer, setMatrix, gameInitialized, setWinner, winner}) {
 
     function checkEndGame(matrix) {
         if (
@@ -35,7 +35,7 @@ export default function Cell({x, y, activePlayer, gameMatrix, setActivePlayer, s
     };
     
     function manageClick() {
-        if (gameInitialized) {
+        if (gameInitialized && !winner) {
             setMatrix(gameMatrix => editMatrix(x, y, activePlayer));
             if (activePlayer === 'O') {
                 setActivePlayer('X');

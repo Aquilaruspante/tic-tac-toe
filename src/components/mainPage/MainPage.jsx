@@ -17,11 +17,11 @@ export default function MainPage() {
     const [activePlayer, setActivePlayer] = useState();
     const [gameInitialized, setGameInitialized] = useState(false);
     const [gameMatrix, setMatrix] = useState(matrix);
-    const [winner, setWinner] = useState();
+    const [winner, setWinner] = useState(false);
 
     function manageNewGameClick() {
         if (!gameInitialized) {
-            setWinner(null);
+            setWinner(false);
             const playerIndex = randomizeActivePlayer();
             if (playerIndex === 0) setActivePlayer('O');
             if (playerIndex === 1) setActivePlayer('X');
@@ -30,7 +30,7 @@ export default function MainPage() {
     };
 
     function manageRestart() {
-        setWinner(null);
+        setWinner(false);
         setMatrix([
             [null, null, null],
             [null, null, null],
@@ -49,7 +49,7 @@ export default function MainPage() {
             </header>
             {!winner && <div className={styles.infoPanel}>{activePlayer ? `Active Player: ${activePlayer}` : 'Start new game'}</div>}
             {winner && <div className={styles.infoPanel}>{`Player ${winner} won`}</div>}
-            <PlayArea activePlayer={activePlayer} setActivePlayer={setActivePlayer} gameInitialized={gameInitialized} gameMatrix={gameMatrix} setMatrix={setMatrix} setWinner={setWinner} />
+            <PlayArea activePlayer={activePlayer} winner={winner} setActivePlayer={setActivePlayer} gameInitialized={gameInitialized} gameMatrix={gameMatrix} setMatrix={setMatrix} setWinner={setWinner} />
             {!gameInitialized && <button className={styles.button} onClick={manageNewGameClick}>New Game</button>}
             {gameInitialized && <button className={styles.restartButton} onClick={manageRestart}>Restart</button>} 
         </>
