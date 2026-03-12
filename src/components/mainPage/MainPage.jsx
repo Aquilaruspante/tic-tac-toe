@@ -36,6 +36,7 @@ export default function MainPage() {
         const playerIndex = randomizeActivePlayer();
         if (playerIndex === 0) setActivePlayer('O');
         if (playerIndex === 1) setActivePlayer('X');
+        setGameInitialized(true);
     };
 
     return (
@@ -45,8 +46,8 @@ export default function MainPage() {
             </header>
             <div className={styles.infoPanel}>{activePlayer ? `Active Player: ${activePlayer}` : 'Start new game'}</div>
             <PlayArea activePlayer={activePlayer} setActivePlayer={setActivePlayer} gameInitialized={gameInitialized} gameMatrix={gameMatrix} setMatrix={setMatrix} />
-            <button className={styles.button} onClick={manageNewGameClick}>New Game</button>
-            <button className={styles.restartButton} onClick={manageRestart}>Restart</button>
+            {!gameInitialized && <button className={styles.button} onClick={manageNewGameClick}>New Game</button>}
+            {gameInitialized && <button className={styles.restartButton} onClick={manageRestart}>Restart</button>} 
         </>
     )
 }
