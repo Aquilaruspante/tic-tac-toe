@@ -1,6 +1,9 @@
+import { useContext } from 'react';
+import { Context } from '../../Context';
 import styles from './Cell.module.css';
 
-export default function Cell({x, y, activePlayer, gameMatrix, setActivePlayer, setMatrix, gameInitialized, setWinner, winner}) {
+export default function Cell({x, y }) {
+    const { gameMatrix, setActivePlayer, setMatrix, gameInitialized, setWinner, winner, activePlayer } = useContext(Context);
 
     function checkEndGame(matrix) {
         if (
@@ -35,6 +38,7 @@ export default function Cell({x, y, activePlayer, gameMatrix, setActivePlayer, s
     };
     
     function manageClick() {
+        console.log('click', x, y, activePlayer);
         if (gameInitialized && !winner) {
             setMatrix(gameMatrix => editMatrix(x, y, activePlayer));
             if (activePlayer === 'O') {

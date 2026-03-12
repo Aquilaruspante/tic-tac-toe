@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PlayArea from "../playArea/PlayArea";
 import styles from './MainPage.module.css';
+import { Context } from "../../Context";
 
 function randomizeActivePlayer() {
     const index = Math.floor(Math.random() * 2);
@@ -49,7 +50,9 @@ export default function MainPage() {
             </header>
             {!winner && <div className={styles.infoPanel}>{activePlayer ? `Active Player: ${activePlayer}` : 'Start new game'}</div>}
             {winner && <div className={styles.infoPanel}>{`Player ${winner} won`}</div>}
-            <PlayArea activePlayer={activePlayer} winner={winner} setActivePlayer={setActivePlayer} gameInitialized={gameInitialized} gameMatrix={gameMatrix} setMatrix={setMatrix} setWinner={setWinner} />
+            <Context value={{ activePlayer, winner, setActivePlayer, gameInitialized, gameMatrix, setMatrix, setWinner }}>
+                <PlayArea />
+            </Context>
             {!gameInitialized && <button className={styles.button} onClick={manageNewGameClick}>New Game</button>}
             {gameInitialized && <button className={styles.restartButton} onClick={manageRestart}>Restart</button>} 
         </>
